@@ -1,6 +1,8 @@
 # manualmap
 
-x64 manual-mapping DLL injector cdylib for Windows.
+x64 manual-mapping DLL injector for Windows, built as a Rust cdylib.
+
+Handles relocations, imports, TLS, and calls `DllMain(DLL_PROCESS_ATTACH)` in the target.
 
 ## Build
 
@@ -8,9 +10,9 @@ x64 manual-mapping DLL injector cdylib for Windows.
 cargo build --release
 ```
 
-Output: `target/release/manualmap.dll`.
+Produces `target/release/manualmap.dll`.
 
-## Use
+## API
 
 ```c
 extern int injector_run(
@@ -19,9 +21,8 @@ extern int injector_run(
     uint32_t flags);
 ```
 
-Maps the DLL into the target PID and runs `DllMain(DLL_PROCESS_ATTACH)`.
-Returns 0 on success or a negative `codes::E_*` on failure (see `src/lib.rs`).
+Returns 0 on success, negative `E_*` code on failure (see `src/lib.rs`).
 
 ## License
 
-MIT.
+MIT
